@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>U.S. ARMY // ENIGMA-100 TAC-SYSTEM</title>
+    <style>
+        :root {
+            --army-dark: #0f140d;
+            --panel-bg: #192017;
+            --panel-border: #384832;
+            --army-olive: #556b2f;
+            --army-tan: #c2b280;
+            --army-green-bright: #4caf50;
+            --army-red: #d32f2f;
+            --text-main: #e0e6df;
+            --text-dim: #8b9b85;
+            --font-tactical: 'Courier New', Courier, monospace;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--army-dark);
+            color: var(--text-main);
+            font-family: var(--font-tactical);
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-image: 
+                radial-gradient(#253320 15%, transparent 16%),
+                radial-gradient(#1e291b 15%, transparent 16%);
+            background-size: 20px 20px;
+            background-position: 0 0, 10px 10px;
+        }
+
+        .main-frame {
+            width: 100%;
+            max-width: 950px;
+            background: var(--panel-bg);
+            border: 3px solid var(--army-olive);
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.8), inset 0 0 10px rgba(85, 107, 47, 0.3);
+            border-radius: 4px;
+            padding: 25px;
+            position: relative;
+        }
+
+        header {
+            border-bottom: 2px solid var(--panel-border);
+            padding-bottom: 15px;
+            margin-bottom: 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .header-title {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .star-logo {
+            font-size: 1.8rem;
+            color: var(--army-tan);
+        }
+
+        h1 {
+            color: var(--army-tan);
+            font-size: 1.4rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .badge-classification {
+            background: var(--army-olive);
+            color: #000;
+            padding: 4px 10px;
+            font-weight: bold;
+            font-size: 0.75rem;
+            letter-spacing: 1px;
+            border-radius: 2px;
+        }
+
+        .tactical-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+        }
+
+        @media (min-width: 768px) {
+            .tactical-grid-2col {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 20px;
+            }
+        }
+
+        .panel-box {
+            background: rgba(10, 14, 9, 0.6);
+            border: 1px solid var(--panel-border);
+            padding: 15px;
+            position: relative;
+            border-left: 4px solid var(--army-olive);
+        }
+
+        .panel-title {
+            color: var(--army-tan);
+            font-size: 0.85rem;
+            font-weight: bold;
+            margin-bottom: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        label {
+            display: block;
+            font-size: 0.75rem;
+            color: var(--text-dim);
+            margin-bottom: 6px;
+            text-transform: uppercase;
+        }
+
+        input[type="text"], textarea {
+            width: 100%;
+            background: #090c08;
+            border: 1px solid var(--panel-border);
+            color: var(--army-green-bright);
+            font-family: var(--font-tactical);
+            padding: 10px;
+            font-size: 0.9rem;
+            outline: none;
+            transition: border 0.2s;
+        }
+
+        input[type="text"]:focus, textarea:focus {
+            border-color: var(--army-tan);
+        }
+
+        textarea {
+            height: 110px;
+            resize: vertical;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 10px;
+            margin-top: 10px;
+            flex-wrap: wrap;
+        }
+
+        button {
+            flex: 1;
+            min-width: 120px;
+            background: #232c20;
+            border: 1px solid var(--army-olive);
+            color: var(--army-tan);
+            padding: 10px 14px;
+            font-family: var(--font-tactical);
+            font-weight: bold;
+            cursor: pointer;
+            text-transform: uppercase;
+            font-size: 0.8rem;
+            letter-spacing: 1px;
+            transition: all 0.2s;
+        }
+
+        button:hover {
+            background: var(--army-olive);
+            color: #fff;
+            box-shadow: 0 0 10px rgba(85, 107, 47, 0.5);
+        }
+
+        button.btn-primary {
+            background: var(--army-olive);
+            color: #fff;
+            border-color: var(--army-tan);
+        }
+
+        button.btn-primary:hover {
+            background: var(--army-tan);
+            color: #000;
+        }
+
+        button.btn-danger {
+            border-color: var(--army-red);
+            color: var(--army-red);
+            background: transparent;
+        }
+
+        button.btn-danger:hover {
+            background: var(--army-red);
+            color: #fff;
+        }
+
+        .saved-vault {
+            max-height: 130px;
+            overflow-y: auto;
+            background: #090c08;
+            border: 1px solid var(--panel-border);
+            margin-top: 10px;
+        }
+
+        .vault-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 6px 10px;
+            border-bottom: 1px solid #1a2218;
+            font-size: 0.8rem;
+        }
+
+        .vault-item:last-child {
+            border-bottom: none;
+        }
+
+        .vault-item .key-text {
+            word-break: break-all;
+            color: var(--text-main);
+            margin-right: 8px;
+        }
+
+        .vault-actions {
+            display: flex;
+            gap: 4px;
+        }
+
+        .vault-actions button {
+            padding: 3px 6px;
+            font-size: 0.7rem;
+            min-width: auto;
+        }
+
+        .status-bar {
+            margin-top: 20px;
+            padding-top: 10px;
+            border-top: 1px solid var(--panel-border);
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.75rem;
+            color: var(--text-dim);
+        }
+
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #090c08; }
+        ::-webkit-scrollbar-thumb { background: var(--army-olive); }
+    </style>
+</head>
+<body>
+
+<div class="main-frame">
+    <header>
+        <div class="header-title">
+            <span class="star-logo">★</span>
+            <div>
+                <h1>ENIGMA-100 TAC-SYSTEM</h1>
+                <div style="font-size: 0.7rem; color: var(--text-dim);">US ARMY SIGNAL CORPS SPECIFICATION</div>
+            </div>
+        </div>
+        <span class="badge-classification">RESTRICTED // NO-ACHILLES ENGINE</span>
+    </header>
+
+    <div class="tactical-grid">
+        <div class="tactical-grid-2col">
+            <div class="panel-box">
+                <div class="panel-title">1. Configuración de Semilla / Clave</div>
+                <label for="cipherKey">Contraseña o Frase de Cifrado:</label>
+                <input type="text" id="cipherKey" placeholder="Introduce la clave secreta..." autocomplete="off">
+                <div class="btn-group">
+                    <button onclick="generateRandomKey()">Aleatoria</button>
+                    <button onclick="saveCurrentKey()">Guardar</button>
+                </div>
+            </div>
+
+            <div class="panel-box">
+                <div class="panel-title">Bóveda de Claves Guardadas</div>
+                <div class="saved-vault" id="savedKeysContainer"></div>
+            </div>
+        </div>
+
+        <div class="panel-box">
+            <div class="panel-title">2. Entrada de Mensaje</div>
+            <textarea id="inputText" placeholder="Escribe o pega aquí el texto para Cifrar o Desencriptar..."></textarea>
+            <div class="btn-group">
+                <button onclick="pasteToInput()">Pegar</button>
+                <button class="btn-danger" onclick="clearInput()">Limpiar</button>
+            </div>
+        </div>
+
+        <div class="panel-box" style="border-left-color: var(--army-tan);">
+            <div class="panel-title">3. Ejecutar Procesamiento</div>
+            <div class="btn-group">
+                <button class="btn-primary" onclick="processText()">🔒 Cifrar Mensaje</button>
+                <button class="btn-primary" onclick="processText()">🔓 Desencriptar Mensaje</button>
+            </div>
+        </div>
+
+        <div class="panel-box">
+            <div class="panel-title">4. Resultado / Salida</div>
+            <textarea id="outputText" readonly placeholder="El texto procesado aparecerá aquí..."></textarea>
+            <div class="btn-group">
+                <button onclick="copyOutput()">Copiar Resultado</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="status-bar">
+        <span>ENGINE STATUS: OPERATIONAL</span>
+        <span>ROTORS: 100 ACTIVE</span>
+        <span>ACHILLES FIX: ENABLED</span>
+    </div>
+</div>
+
+<script>
+var _0x5a1b=(function(){var _0x1a=true;return function(_0x2b,_0x3c){var _0x4d=_0x1a?function(){if(_0x3c){var _0x5e=_0x3c.apply(_0x2b,arguments);_0x3c=null;return _0x5e;}}:function(){};_0x1a=false;return _0x4d;};})();
+function _0x100(_0x1a1){return function(){var _0x2b2=_0x1a1+=0x6D2B79F5;_0x2b2=Math.imul(_0x2b2^_0x2b2>>>15,_0x2b2|1);_0x2b2^=_0x2b2+Math.imul(_0x2b2^_0x2b2>>>8,_0x2b2|38);return((_0x2b2^_0x2b2>>>15)>>>0)/4294967296;};}
+function _0x200(_0x3a3){let _0x4b4=0;for(let _0x5c5=0;_0x5c5<_0x3a3.length;_0x5c5++){let _0x6d6=_0x3a3.charCodeAt(_0x5c5);_0x4b4=((_0x4b4<<5)-_0x4b4)+_0x6d6;_0x4b4|=0;}return _0x4b4>>>0;}
+function _0x300(_0x7e7){let _0x8f8=_0x200(_0x7e7||"\x55\x53\x5F\x41\x52\x4D\x59\x5F\x44\x45\x46\x41\x55\x4C\x54\x5F\x4B\x45\x59");let _0x9a9=_0x100(_0x8f8);const _0x101=100;const _0x111=256;let _0x121=[];for(let _0x131=0;_0x131<_0x101;_0x131++){let _0x141=Array.from({length:_0x111},(_0x151,_0x161)=>_0x161);for(let _0x171=_0x111-1;_0x171>0;_0x171--){let _0x181=Math.floor(_0x9a9()*(_0x171+1));[_0x141[_0x171],_0x141[_0x181]]=[_0x141[_0x181],_0x141[_0x171]];}_0x121.push(_0x141);}let _0x191=Array.from({length:_0x111},(_0x1a2,_0x1b2)=>_0x1b2);let _0x1c2=Array.from({length:_0x111},(_0x1d2,_0x1e2)=>_0x1e2);while(_0x1c2.length>=2){let _0x1f2=Math.floor(_0x9a9()*_0x1c2.length);let _0x202=_0x1c2.splice(_0x1f2,1)[0];let _0x212=Math.floor(_0x9a9()*_0x1c2.length);let _0x222=_0x1c2.splice(_0x212,1)[0];_0x191[_0x202]=_0x222;_0x191[_0x222]=_0x202;}if(_0x1c2.length===1){_0x191[_0x1c2[0]]=_0x1c2[0];}let _0x232=[];for(let _0x242=0;_0x242<_0x101;_0x242++){_0x232.push(Math.floor(_0x9a9()*_0x111));}return{a:_0x121,b:_0x191,c:_0x232,d:_0x111};}
+function _0x400(_0x252,_0x262){for(let _0x272=0;_0x272<_0x252.length;_0x272++){_0x252[_0x272]=(_0x252[_0x272]+1)%_0x262;if(_0x252[_0x272]!==0)break;}}
+function _0x500(_0x282,_0x292){let _0x2a1=_0x282;const _0x2b1=_0x292.d;_0x400(_0x292.c,_0x2b1);for(let _0x2c1=0;_0x2c1<100;_0x2c1++){let _0x2d1=_0x292.c[_0x2c1];let _0x2e1=(_0x2a1+_0x2d1)%_0x2b1;let _0x2f1=_0x292.a[_0x2c1][_0x2e1];_0x2a1=(_0x2f1-_0x2d1+_0x2b1)%_0x2b1;}_0x2a1=_0x292.b[_0x2a1];for(let _0x301=99;_0x301>=0;_0x301--){let _0x311=_0x292.c[_0x301];let _0x321=(_0x2a1+_0x311)%_0x2b1;let _0x331=_0x292.a[_0x301].indexOf(_0x321);_0x2a1=(_0x331-_0x311+_0x2b1)%_0x2b1;}return _0x2a1;}
+function processText(){const _0x341=document.getElementById('cipherKey').value;const _0x351=document.getElementById('inputText').value;if(!_0x351){alert("\x41\x74\x65\x6E\x63\x69\xF3\x6E\x3A\x20\x50\x6F\x72\x20\x66\x61\x76\x6F\x72\x2C\x20\x69\x6E\x74\x72\x6F\x64\x75\x63\x65\x20\x74\x65\x78\x74\x6F\x20\x70\x61\x72\x61\x20\x70\x72\x6F\x63\x65\x73\x61\x72\x2E");return;}const _0x361=_0x300(_0x341);let _0x371="";for(let _0x381=0;_0x381<_0x351.length;_0x381++){let _0x391=_0x351.charCodeAt(_0x381);if(_0x391<256){let _0x3a4=_0x500(_0x391,_0x361);_0x371+=String.fromCharCode(_0x3a4);}else{let _0x3b4=_0x391&0xFF;let _0x3c4=(_0x391>>8)&0xFF;let _0x3d4=_0x500(_0x3b4,_0x361);let _0x3e4=_0x500(_0x3c4,_0x361);_0x371+=String.fromCharCode((_0x3e4<<8)|_0x3d4);}}document.getElementById('outputText').value=_0x371;}
+async function pasteToInput(){try{const _0x3f4=await navigator.clipboard.readText();document.getElementById('inputText').value=_0x3f4;}catch(_0x404){alert("\x4E\x6F\x20\x73\x65\x20\x70\x75\x64\x6F\x20\x61\x63\x63\x65\x64\x65\x72\x20\x61\x6C\x20\x70\x6F\x72\x74\x61\x70\x61\x70\x65\x6C\x65\x73\x2E");}}
+function clearInput(){document.getElementById('inputText').value="";}
+async function copyOutput(){const _0x414=document.getElementById('outputText');if(!_0x414.value)return;try{await navigator.clipboard.writeText(_0x414.value);alert("\x01\x21\x52\x65\x73\x75\x6C\x74\x61\x64\x6F\x20\x63\x6F\x70\x69\x61\x64\x6F\x20\x61\x6C\x20\x70\x6F\x72\x74\x61\x70\x61\x70\x65\x6C\x65\x73\x21");}catch(_0x424){alert("\x45\x72\x72\x6F\x72\x20\x61\x6C\x20\x63\x6F\x70\x69\x61\x72\x2E");}}
+function generateRandomKey(){const _0x434='\x41\x42\x43\x44\x45\x46\x47\x48\x49\x4A\x4B\x4C\x4D\x4E\x4F\x50\x51\x52\x53\x54\x55\x56\x57\x58\x59\x5A\x61\x62\x63\x64\x65\x66\x67\x68\x69\x6A\x6B\x6C\x6D\x6E\x6F\x70\x71\x72\x73\x74\x75\x76\x77\x78\x79\x7A\x30\x31\x32\x33\x34\x35\x36\x37\x38\x39\x21\x40\x23\x24\x25\x5E\x26\x2A\x28\x29\x5F\x2B\x2D\x3D\x5B\x5D\x7B\x7D\x7C\x3B\x3A\x2C\x2E\x3C\x3E\x3F';let _0x444=32;let _0x454='';const _0x464=window.crypto||window.msCrypto;if(_0x464){let _0x474=new Uint32Array(_0x444);_0x464.getRandomValues(_0x474);for(let _0x484=0;_0x484<_0x444;_0x484++){_0x454+=_0x434[_0x474[_0x484]%_0x434.length];}}else{for(let _0x494=0;_0x494<_0x444;_0x494++){_0x454+=_0x434.floor(Math.random()*_0x434.length);}}document.getElementById('cipherKey').value=_0x454;}
+function getSavedKeys(){const _0x4a4=localStorage.getItem('\x65\x6E\x69\x67\x6D\x61\x5F\x73\x61\x76\x65\x64\x5F\x6B\x65\x79\x73');return _0x4a4?JSON.parse(_0x4a4):[];}
+function saveCurrentKey(){const _0x4b5=document.getElementById('cipherKey').value.trim();if(!_0x4b5){alert("\x49\x6E\x74\x72\x6F\x64\x75\x63\x65\x20\x75\x6E\x61\x20\x63\x6C\x61\x76\x65\x20\x61\x6E\x74\x65\x73\x20\x64\x65\x20\x67\x75\x61\x72\x64\x61\x72\x6C\x61\x2E");return;}let _0x4c5=getSavedKeys();if(!_0x4c5.includes(_0x4b5)){_0x4c5.push(_0x4b5);localStorage.setItem('\x65\x6E\x69\x67\x6D\x61\x5F\x73\x61\x76\x65\x64\x5F\x6B\x65\x79\x73',JSON.stringify(_0x4c5));renderSavedKeys();}else{alert("\x4C\x61\x20\x63\x6C\x61\x76\x65\x20\x79\x61\x20\x73\x65\x20\x65\x6E\x63\x75\x65\x6E\x74\x72\x61\x20\x67\x75\x61\x72\x64\x61\x64\x61\x2E");}}
+function loadKey(_0x4d5){document.getElementById('cipherKey').value=_0x4d5;}
+function deleteKey(_0x4e5){let _0x4f5=getSavedKeys();_0x4f5=_0x4f5.filter(_0x505=>_0x505!==_0x4e5);localStorage.setItem('\x65\x6E\x69\x67\x6D\x61\x5F\x73\x61\x76\x65\x64\x5F\x6B\x65\x79\x73',JSON.stringify(_0x4f5));renderSavedKeys();}
+function renderSavedKeys(){const _0x515=document.getElementById('savedKeysContainer');const _0x525=getSavedKeys();if(_0x525.length===0){_0x515.innerHTML='<div class="vault-item" style="color: var(--text-dim);">No hay claves registradas.</div>';return;}_0x515.innerHTML='';_0x525.forEach(_0x535=>{const _0x545=document.createElement('div');_0x545.className='vault-item';const _0x555=document.createElement('span');_0x555.className='key-text';_0x555.textContent=_0x535;const _0x565=document.createElement('div');_0x565.className='vault-actions';const _0x575=document.createElement('button');_0x575.textContent='Usar';_0x575.onclick=()=>loadKey(_0x535);const _0x585=document.createElement('button');_0x585.textContent='X';_0x585.className='btn-danger';_0x585.onclick=()=>deleteKey(_0x535);_0x565.appendChild(_0x575);_0x565.appendChild(_0x585);_0x545.appendChild(_0x555);_0x545.appendChild(_0x565);_0x515.appendChild(_0x545);});}
+window.onload=function(){renderSavedKeys();};
+</script>
+
+</body>
+</html>
